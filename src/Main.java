@@ -1,63 +1,45 @@
-import br.com.dio.desafio.dominio.Bootcamp;
-import br.com.dio.desafio.dominio.Curso;
-import br.com.dio.desafio.dominio.Dev;
-import br.com.dio.desafio.dominio.Mentoria;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+// Classes como Curso, Mentoria, Bootcamp e Dev aqui
+
 
 public class Main {
     public static void main(String[] args) {
-        Curso curso1 = new Curso();
-        curso1.setTitulo("curso java");
-        curso1.setDescricao("descrição curso java");
-        curso1.setCargaHoraria(8);
-
-        Curso curso2 = new Curso();
-        curso2.setTitulo("curso js");
-        curso2.setDescricao("descrição curso js");
-        curso2.setCargaHoraria(4);
-
-        Mentoria mentoria = new Mentoria();
-        mentoria.setTitulo("mentoria de java");
-        mentoria.setDescricao("descrição mentoria java");
-        mentoria.setData(LocalDate.now());
-
-        /*System.out.println(curso1);
-        System.out.println(curso2);
-        System.out.println(mentoria);*/
-
-        Bootcamp bootcamp = new Bootcamp();
-        bootcamp.setNome("Bootcamp Java Developer");
-        bootcamp.setDescricao("Descrição Bootcamp Java Developer");
-        bootcamp.getConteudos().add(curso1);
-        bootcamp.getConteudos().add(curso2);
-        bootcamp.getConteudos().add(mentoria);
-
-        Dev devCamila = new Dev();
-        devCamila.setNome("Camila");
-        devCamila.inscreverBootcamp(bootcamp);
-        System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
-        devCamila.progredir();
-        devCamila.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
-        System.out.println("Conteúdos Concluídos Camila:" + devCamila.getConteudosConcluidos());
-        System.out.println("XP:" + devCamila.calcularTotalXp());
-
-        System.out.println("-------");
-
-        Dev devJoao = new Dev();
-        devJoao.setNome("Joao");
-        devJoao.inscreverBootcamp(bootcamp);
-        System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
+        // Criando Cursos
+        Curso cursoJava = new Curso("Java Básico", "Curso introdutório de Java", 8);
+        Curso cursoPOO = new Curso("POO com Java", "Curso de Programação Orientada a Objetos", 10);
+        
+        // Criando Mentoria
+        Mentoria mentoriaJava = new Mentoria("Mentoria Java", "Dicas avançadas de Java", LocalDate.now());
+        
+        // Criando Bootcamp
+        Bootcamp bootcampJava = new Bootcamp("Bootcamp Java Developer", "Aprenda Java e OOP do zero ao avançado!");
+        bootcampJava.adicionarConteudo(cursoJava);
+        bootcampJava.adicionarConteudo(cursoPOO);
+        
+        // Criando Devs
+        Dev devJoao = new Dev("João");
+        Dev devMaria = new Dev("Maria");
+        
+        // Inscrever Devs no Bootcamp
+        bootcampJava.inscreverDev(devJoao);
+        bootcampJava.inscreverDev(devMaria);
+        
+        // Inscrição de cursos pelos Devs
+        devJoao.inscreverCurso(cursoJava);
+        devMaria.inscreverCurso(cursoPOO);
+        
+        // Simulando progresso dos devs
         devJoao.progredir();
-        devJoao.progredir();
-        devJoao.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        System.out.println("Conteúdos Concluidos João:" + devJoao.getConteudosConcluidos());
-        System.out.println("XP:" + devJoao.calcularTotalXp());
+        devMaria.progredir();
 
+        // Exibindo resultados
+        System.out.println("Conteúdos do Bootcamp: " + bootcampJava.getConteudos());
+        System.out.println("Dev João - Conteúdos Inscritos: " + devJoao.getConteudosInscritos());
+        System.out.println("Dev João - Conteúdos Concluídos: " + devJoao.getConteudosConcluidos());
+        System.out.println("Dev Maria - Conteúdos Inscritos: " + devMaria.getConteudosInscritos());
+        System.out.println("Dev Maria - Conteúdos Concluídos: " + devMaria.getConteudosConcluidos());
     }
-
 }
